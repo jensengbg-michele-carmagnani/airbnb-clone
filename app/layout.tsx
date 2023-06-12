@@ -1,3 +1,6 @@
+import ClientOnly from "./components/ClientOnly";
+import RegisterModal from "./components/RegisterModal";
+
 import { Navabar } from "./components/navbar/Navabar";
 import "./globals.css";
 import { Nunito } from "next/font/google";
@@ -17,7 +20,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <Navabar />
+        <ClientOnly>
+          <Navabar />
+          <RegisterModal />
+          {/* <Modal
+            disabled={false}
+            isOpen
+            title={"Login"}
+            actionLabel="Submit"
+            secondaryActionLabel="Cancel"
+            // onClose={() => console.log("onClose")}
+            // onSubmit={() => console.log("onSubmit")}
+          /> */}
+        </ClientOnly>
+
         {children}
       </body>
     </html>

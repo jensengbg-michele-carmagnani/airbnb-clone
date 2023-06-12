@@ -7,10 +7,11 @@ export const Logo = () => {
   const router = useRouter();
   return (
     <Image
-      className="cursor-pointer hidden md:block "
+      className="cursor-pointer hidden md:block w-auto h-auto"
       alt="Logo"
       height="100"
       width="100"
+      priority={true}
       src="/images/logo.png"
     />
   );
