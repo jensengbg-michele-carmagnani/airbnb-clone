@@ -9,7 +9,7 @@ interface ModalProps {
   onClose: () => void;
   onSubmit: () => void;
   title?: string;
-  body?: string;
+  body?: React.ReactElement;
   footer?: string;
   actionLabel: string;
   disabled?: boolean;
@@ -52,8 +52,9 @@ const Modal: React.FC<ModalProps> = ({
     if (disabled || !secondaryAction) return;
     secondaryAction();
   }, [disabled, secondaryAction]);
-  console.log(secondaryActionLabel);
 
+  if (!isOpen) return null;
+  
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70">

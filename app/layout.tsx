@@ -1,8 +1,9 @@
+import "./globals.css";
+
 import ClientOnly from "./components/ClientOnly";
-import RegisterModal from "./components/RegisterModal";
+import RegisterModal from "./components/modals/RegisterModal";
 
 import { Navabar } from "./components/navbar/Navabar";
-import "./globals.css";
 import { Nunito } from "next/font/google";
 
 export const metadata = {
