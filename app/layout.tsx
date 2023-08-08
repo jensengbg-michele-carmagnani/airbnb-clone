@@ -5,6 +5,7 @@ import RegisterModal from "./components/modals/RegisterModal";
 
 import { Navabar } from "./components/navbar/Navabar";
 import { Nunito } from "next/font/google";
+import ToasterProvider from "./providers/ToasterProvider";
 
 export const metadata = {
   title: "Airbnb",
@@ -22,8 +23,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <ClientOnly>
-          <Navabar />
+          <ToasterProvider />
           <RegisterModal />
+          <Navabar />
           {/* <Modal
             disabled={false}
             isOpen

@@ -10,7 +10,7 @@ interface ModalProps {
   onSubmit: () => void;
   title?: string;
   body?: React.ReactElement;
-  footer?: string;
+  footer?: React.ReactElement;
   actionLabel: string;
   disabled?: boolean;
   secondaryAction?: () => void;
@@ -54,7 +54,7 @@ const Modal: React.FC<ModalProps> = ({
   }, [disabled, secondaryAction]);
 
   if (!isOpen) return null;
-  
+
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70">
@@ -101,6 +101,7 @@ const Modal: React.FC<ModalProps> = ({
                     onClick={handleSubmit}
                   />
                 </div>
+                {footer}
               </div>
             </div>
           </div>
