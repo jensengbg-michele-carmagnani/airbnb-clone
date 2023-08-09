@@ -2,6 +2,7 @@ import "./globals.css";
 
 import ClientOnly from "./components/ClientOnly";
 import RegisterModal from "./components/modals/RegisterModal";
+import LoginModal from "./components/modals/LoginModal";
 
 import { Navabar } from "./components/navbar/Navabar";
 import { Nunito } from "next/font/google";
@@ -25,16 +26,8 @@ export default function RootLayout({
         <ClientOnly>
           <ToasterProvider />
           <RegisterModal />
+          <LoginModal />
           <Navabar />
-          {/* <Modal
-            disabled={false}
-            isOpen
-            title={"Login"}
-            actionLabel="Submit"
-            secondaryActionLabel="Cancel"
-            // onClose={() => console.log("onClose")}
-            // onSubmit={() => console.log("onSubmit")}
-          /> */}
         </ClientOnly>
 
         {children}
