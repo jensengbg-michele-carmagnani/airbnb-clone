@@ -1,11 +1,18 @@
 "use client";
 
 import { Container } from "../Container";
+import Categories from "./Categories";
 import { Logo } from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
+import { SafeUser } from "@/app/types";
 
-export const Navabar = () => {
+interface NavbarProps {
+  currentUser: SafeUser | null;
+}
+
+export const Navabar: React.FC<NavbarProps> = ({ currentUser }) => {
+  console.log("CURRENTUSER-->", currentUser);
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b-[1px]">
@@ -14,9 +21,10 @@ export const Navabar = () => {
             <Logo />
             <Search />
 
-            <UserMenu />
+            <UserMenu currentUser={currentUser} />
           </div>
         </Container>
+        <Categories />
       </div>
     </div>
   );

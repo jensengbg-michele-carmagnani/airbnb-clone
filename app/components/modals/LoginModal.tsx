@@ -3,8 +3,8 @@
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { signIn } from "next-auth";
-import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import useRegisterModal from "@/app/hooks/useRegiserModal";
 import Modal from "./Modal";
@@ -13,11 +13,13 @@ import Input from "../inputs/Input";
 import { toast } from "react-hot-toast";
 import Button from "../Button";
 import useLoginModal from "@/app/hooks/useLoginModal";
+import { useRouter } from "next/navigation";
 
 const LoginModal = () => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -31,8 +33,27 @@ const LoginModal = () => {
   });
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    signIn("credetials");
+    signIn("credentials", {
+      ...data,
+      redirect: false,
+    })
+      .then((callback) => {
+        setIsLoading(false);
+        if (callback?.ok) {
+          router.refresh();
+          loginModal.onClose();
+          toast.success("Logged in successfully");
+        }
+        if (callback?.error) throw new Error("Password or username incorrect");
+      })
+      .catch((error: Error) => {
+        return toast.error(error.message);
+      });
   };
+  const onToggle = useCallback(() => {
+    loginModal.onClose();
+    registerModal.onOpen();
+  }, [loginModal, registerModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -63,13 +84,13 @@ const LoginModal = () => {
         outline
         label="Continue with google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
       <Button
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => signIn("github")}
       />
       <div className="text-neutral-500 text-center mt-4 font-light ">
         <div className="flex fitems-center justify-center text-center gap-2">

@@ -14,10 +14,10 @@ model User {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
   name           String?
   email          String?   @unique
-  emalVerified   DateTime?
+  emailVerified  DateTime? @map("email_verified")
   image          String?
   hashedPassword String?
-  createAt       DateTime  @default(now())
+  createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   favoriteIds    String[]  @db.ObjectId
 
@@ -64,7 +64,7 @@ model Listing {
 }
 
 model Reservation {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  id         String   @id @default(cuid()) @map("_id") @db.ObjectId
   userId     String   @db.ObjectId
   listingId  String   @db.ObjectId
   startDate  DateTime

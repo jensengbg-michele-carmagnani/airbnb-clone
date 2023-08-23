@@ -1,10 +1,11 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import NextAuth, { AuthOptions } from "next-auth";
-import prisma from "@/app/libs/prismadb";
+import bcrypt from "bcrypt";
+import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import bcrypt from "bcrypt";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "@/app/libs/prismadb";
+import { User } from "@prisma/client";
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -18,10 +19,10 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     CredentialsProvider({
-      name: "credetials",
+      name: "credentials",
       credentials: {
         email: { label: "email", type: "text" },
-        password: { label: "password", type: "text" },
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -34,7 +35,7 @@ export const authOptions: AuthOptions = {
           },
         });
 
-        if (!user || !user.hashedPassword) {
+        if (!user || !user?.hashedPassword) {
           throw new Error("Invalid credentials");
         }
 
@@ -51,15 +52,14 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
-
   pages: {
     signIn: "/",
+    signOut: "/",
   },
-  debug: process.env.NODE_ENV === "development",
+  debug: process.env.NODE_ENV !== "production",
+
   session: {
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
-
-export default NextAuth(authOptions);
