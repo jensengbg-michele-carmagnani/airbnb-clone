@@ -5,22 +5,22 @@ import { BiDollar } from "react-icons/bi";
 
 interface InputProps {
   id: string;
-  lable: string;
+  label: string;
   type?: string;
   disabled?: boolean;
   formatPrice?: boolean;
   required?: boolean;
   register?: UseFormRegister<FieldValues>;
-  error?: FieldErrors;
+  errors?: FieldErrors;
 }
 
 const Input: React.FC<InputProps> = ({
   id,
-  lable,
+  label,
   type,
   disabled,
   formatPrice,
-  error,
+  errors,
   required,
   register,
 }) => {
@@ -42,8 +42,8 @@ const Input: React.FC<InputProps> = ({
         placeholder=" "
         className={`text-black peer w-full font-light p-4 pt-6 bg-white border-2 rouded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed
         ${formatPrice ? "pl-9" : "pl-4"}
-        ${error && error[id] ? "border-red-500" : "border-neutral-300"}
-        ${error && error[id] ? "focus:border-red-500" : "focus:border-black"}
+        ${errors && errors[id] ? "border-red-500" : "border-neutral-300"}
+        ${errors && errors[id] ? "focus:border-red-500" : "focus:border-black"}
         
         `}
       />
@@ -56,10 +56,10 @@ const Input: React.FC<InputProps> = ({
         peer-focus:scale-75
         peer-focus:-translate-y-4
         peer-focus:-translate-x-2
-        ${error && error[id] ? "text-rose-500" : "text-zinc-500"}
+        ${errors && errors[id] ? "text-rose-500" : "text-zinc-500"}
         `}
       >
-        {lable}
+        {label}
       </label>
     </div>
   );
