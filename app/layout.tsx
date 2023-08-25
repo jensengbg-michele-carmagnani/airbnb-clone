@@ -34,8 +34,7 @@ export default async function RootLayout({
           <RentModal />
           <Navabar currentUser={currentUser} />
         </ClientOnly>
-
-        {children}
+        <div className="pb-20 pt-28">{children}</div>
       </body>
     </html>
   );
