@@ -67,6 +67,7 @@ const RentModal = (props: Props) => {
       }),
     [location]
   );
+  // setCustomValue doesn't rerender the page so there's need to work around
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,
@@ -106,6 +107,8 @@ const RentModal = (props: Props) => {
     if (step === STEPS.CATEGORY) return undefined;
     return "Back";
   }, [step]);
+
+  // All steps of categories
 
   let bodyContent = (
     <div className="flex flex-col gab-8">
@@ -234,35 +237,14 @@ const RentModal = (props: Props) => {
     );
   }
 
-  if (step === STEPS.PRICE) {
-    bodyContent = (
-      <div className="flex flex-col gap-8">
-        <Heading
-          title="Now, set your price"
-          subtitle="How much do you charge per night?"
-        />
-        <Input
-          id="price"
-          label="Price"
-          formatPrice
-          type="number"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-        />
-      </div>
-    );
-  }
-
   return (
     <Modal
       isOpen={rentModal.isOpen}
       onClose={rentModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
       title="Airbnb your home"
-      actionLabel={Actionlabel}
       body={bodyContent}
+      actionLabel={Actionlabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
     />

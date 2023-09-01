@@ -66,19 +66,19 @@ const LoginModal = () => {
       <Heading title="Welcome back" subtitle="Login to your account " />
       <Input
         id="email"
-        lable={"Email"}
+        label={"Email"}
         disabled={isLoading}
         register={register}
-        error={errors}
+        errors={errors}
         required
       />
       <Input
         id="password"
         type="password"
-        lable={"Password"}
+        label={"Password"}
         disabled={isLoading}
         register={register}
-        error={errors}
+        errors={errors}
         required
       />
     </div>
