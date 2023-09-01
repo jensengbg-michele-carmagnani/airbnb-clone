@@ -55,27 +55,27 @@ const RegisterModal = () => {
       <Heading title="Welcome to Airbnb" subtitle="Creata an account!" />
       <Input
         id="email"
-        lable={"Email"}
+        label={"Email"}
         disabled={isLoading}
         register={register}
-        error={errors}
+        errors={errors}
         required
       />
       <Input
         id="name"
-        lable={"Name"}
+        label={"Name"}
         disabled={isLoading}
         register={register}
-        error={errors}
+        errors={errors}
         required
       />
       <Input
         id="password"
         type="password"
-        lable={"Password"}
+        label={"Password"}
         disabled={isLoading}
         register={register}
-        error={errors}
+        errors={errors}
         required
       />
     </div>
