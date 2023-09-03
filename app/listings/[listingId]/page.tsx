@@ -1,9 +1,13 @@
+import getListingById from "@/app/actions/getListinfByid";
 import React from "react";
 
-type Props = {};
+interface Iparams {
+  listingId?: string;
+}
 
-const Listing = (props: Props) => {
-  return <div>Listing</div>;
+const Listing = async ({ params }: { params: Iparams }) => {
+  const listing = await getListingById(params);
+  return <div>{JSON.stringify(listing)}</div>;
 };
 
 export default Listing;
