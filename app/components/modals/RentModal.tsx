@@ -65,7 +65,7 @@ const RentModal = (props: Props) => {
       dynamic(() => import("../Map"), {
         ssr: false,
       }),
-    [location]
+    []
   );
   // setCustomValue doesn't rerender the page so there's need to work around
   const setCustomValue = (id: string, value: any) => {
