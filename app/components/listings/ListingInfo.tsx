@@ -1,11 +1,17 @@
 "use client";
 
+import dynamic from "next/dynamic";
+import { IconType } from "react-icons";
+
 import useCountries from "@/app/hooks/useCountries";
 import { SafeUser } from "@/app/types";
-import { IconType } from "react-icons";
+
 import Avatar from "../Avatar";
 import ListingCategory from "./ListingCategory";
-import Map from "../Map";
+
+const Map = dynamic(() => import("../Map"), {
+  ssr: false,
+});
 
 interface ListingInfoProps {
   user: SafeUser;
@@ -35,6 +41,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
   const { getByValue } = useCountries();
 
   const coordinates = getByValue(locationValue)?.latlng;
+
   return (
     <div className="col-span-4 flex flex-col gap-8">
       <div className="flex flex-col gap-2">
