@@ -19,8 +19,6 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
   const params = useSearchParams();
 
   const handleOnClick = useCallback(() => {
-    console.log("handleOnCLick", params.toString());
-
     let currentQuery = {};
     if (params) {
       currentQuery = qs.parse(params.toString());

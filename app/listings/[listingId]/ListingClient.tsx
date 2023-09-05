@@ -10,7 +10,6 @@ import { differenceInDays, eachDayOfInterval } from "date-fns";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
 
-
 import { CATEGORIES } from "@/app/components/navbar/Categories";
 import ListingHead from "@/app/components/listings/ListingHead";
 import ListingInfo from "@/app/components/listings/ListingInfo";
@@ -70,10 +69,10 @@ const ListingClient: React.FC<ListingClientProps> = ({
 
     axios
       .post("/api/reservations", {
+        listingId: listing?.id,
         totalPrice,
         startDate: dateRange.startDate,
         endDate: dateRange.endDate,
-        listingId: listing?.id,
       })
       .then(() => {
         toast.success("Listing reserved!");

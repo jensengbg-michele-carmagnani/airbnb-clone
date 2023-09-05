@@ -83,7 +83,7 @@ const RentModal = (props: Props) => {
     setStep((value) => value + 1);
   };
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (step !== STEPS.PRICE) return onNext();
     setIsLoading(true);
     axios
@@ -95,7 +95,7 @@ const RentModal = (props: Props) => {
         setStep(STEPS.CATEGORY);
         rentModal.onClose();
       })
-      .catch((error) => toast.error("something when wrong"))
+      .catch((error) => toast.error(error.message))
       .finally(() => setIsLoading(false));
   };
   const Actionlabel = useMemo(() => {
