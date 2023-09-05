@@ -14,35 +14,35 @@ model User {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
   name           String?
   email          String?   @unique
-  emailVerified  DateTime? @map("email_verified")
+  emailVerified  DateTime?
   image          String?
   hashedPassword String?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   favoriteIds    String[]  @db.ObjectId
 
-  accounts    Account[]
-  listings    Listing[]
-  reservation Reservation[]
+  accounts     Account[]
+  listings     Listing[]
+  reservations Reservation[]
 }
 
 model Account {
-  id               String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId           String  @db.ObjectId
-  type             String
-  provider         String
-  providerAccontId String
-  refresh_token    String? @db.String
-  access_token     String? @db.String
-  expires_at       Int?
-  token_type       String?
-  scope            String?
-  id_token         String? @db.String
-  session_state    String?
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccontId])
+  @@unique([provider, providerAccountId])
 }
 
 model Listing {
@@ -64,13 +64,14 @@ model Listing {
 }
 
 model Reservation {
-  id         String   @id @default(cuid()) @map("_id") @db.ObjectId
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   userId     String   @db.ObjectId
   listingId  String   @db.ObjectId
   startDate  DateTime
   endDate    DateTime
   totalPrice Int
   createdAt  DateTime @default(now())
-  user       User     @relation(fields: [userId], references: [id])
-  Listing    Listing  @relation(fields: [listingId], references: [id])
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
