@@ -14,7 +14,7 @@ const Home = async ({ searchParams }: HomeProps) => {
   const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
-  if (listings?.length === 0) {
+  if (listings.length === 0) {
     return (
       <ClientOnly>
         <EmptyState showReset />
@@ -38,7 +38,7 @@ const Home = async ({ searchParams }: HomeProps) => {
             gap-8
           "
         >
-          {listings.map((listing) => (
+          {listings.map((listing: any) => (
             <ListingCard
               currentUser={currentUser}
               key={listing.id}
