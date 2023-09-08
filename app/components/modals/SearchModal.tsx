@@ -10,6 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import useSearchModal from "@/app/hooks/useSearchModal";
 
 import Modal from "./Modal";
+import Map from "../Map";
 import Calendar from "../inputs/Calendar";
 import Counter from "../inputs/Counter";
 
@@ -39,13 +40,13 @@ const SearchModal = () => {
     key: "selection",
   });
 
-  const Map = useMemo(
-    () =>
-      dynamic(() => import("../Map"), {
-        ssr: false,
-      }),
-    [location]
-  );
+  // const Map = useMemo(
+  //   () =>
+  //     dynamic(() => import("../Map"), {
+  //       ssr: false,
+  //     }),
+  //   [location]
+  // );
 
   const onBack = useCallback(() => {
     setStep((value) => value - 1);

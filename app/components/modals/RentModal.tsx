@@ -14,6 +14,7 @@ import ImageUpload from "../inputs/ImageUpload";
 import Input from "../inputs/Input";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import Map from "../Map"
 import { useRouter } from "next/navigation";
 
 type Props = {};
@@ -60,13 +61,13 @@ const RentModal = (props: Props) => {
   const bathroomCount = watch("bathroomCount");
   const imageSrc = watch("imageSrc");
 
-  const Map = useMemo(
-    () =>
-      dynamic(() => import("../Map"), {
-        ssr: false,
-      }),
-    []
-  );
+  // const Map = useMemo(
+  //   () =>
+  //     dynamic(() => import("../Map"), {
+  //       ssr: false,
+  //     }),
+  //   []
+  // );
   // setCustomValue doesn't rerender the page so there's need to work around
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
