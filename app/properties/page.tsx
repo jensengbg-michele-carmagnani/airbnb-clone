@@ -1,12 +1,12 @@
 import EmptyState from "../components/EmptyState";
 import ClientOnly from "../components/ClientOnly";
 import getCurrentUser from "../actions/getCurrentUser";
-import getReservations from "../actions/getReservation";
 import TripsClient from "./PropertiesClient";
 import getListings from "../actions/getListings";
 
 const PropertiesPage = async () => {
   const currentUser = await getCurrentUser();
+  console.log("CU PropertisPage", currentUser);
   const listings = await getListings({ userId: currentUser?.id });
   if (!currentUser) {
     return (
