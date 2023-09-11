@@ -9,11 +9,10 @@ import { SafeUser } from "@/app/types";
 import Avatar from "../Avatar";
 import ListingCategory from "./ListingCategory";
 
-// const Map = dynamic(() => import("../Map"), {
-//   ssr: false,
-// });
+const Map = dynamic(() => import("../Map"), {
+  ssr: false,
+});
 
-import Map from "../Map";
 interface ListingInfoProps {
   user: SafeUser;
   description: string;
