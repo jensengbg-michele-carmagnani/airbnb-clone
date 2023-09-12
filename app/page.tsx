@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import ListingCard from "@/app/components/listings/ListingCard";
 import EmptyState from "@/app/components/EmptyState";
 
